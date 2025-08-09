@@ -13,7 +13,8 @@
     "aws-amplify": "^6.6.6",
     "next": "14.2.10",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "zod": "^3.25.17"
   },
   "devDependencies": {
     "@aws-amplify/backend": "^1.5.1",
@@ -25,6 +26,7 @@
     "aws-cdk-lib": "^2",
     "constructs": "^10.3.0",
     "esbuild": "^0.23.1",
+    "sass": "^1.90.0",
     "tsx": "^4.19.0",
     "typescript": "^5.6.2"
   }
