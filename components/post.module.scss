@@ -1,0 +1,30 @@
+.post{
+    max-width: 60ch;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+    color: #333;
+    text-align: center;
+
+    h1 {
+        font-size: 24px;
+        margin-bottom: 10px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    p {
+        font-size: 16px;
+        line-height: 1.5;
+        text-overflow: ellipsis;
+        text-align: start;
+    }
+
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+}

@@ -5,6 +5,7 @@ import { Post } from "./post";
 export type BlogInterface = {
     title: string;
     content: string;
+    owner: string;
 }
 
 export type Blog = BlogInterface & {
@@ -15,6 +16,7 @@ export type Blog = BlogInterface & {
 const blogSchema = z.object({
     title: z.string(),
     content: z.string(),
+    owner: z.string(),
 });
 
 
@@ -23,10 +25,11 @@ export async function createBlog(blog: BlogInterface) : Promise<Blog> {
     if (!validatedBlog.success) {
         throw new Error(validatedBlog.error.message);
     }
-    const { title, content } = validatedBlog.data;
+    const { title, content, owner } = validatedBlog.data;
     const { errors, data: blogData } = await amplifyClient.models.Blog.create({
             title,
             content,
+            owner,
         },
         {
             authMode: "userPool",
@@ -39,6 +42,7 @@ export async function createBlog(blog: BlogInterface) : Promise<Blog> {
         id: blogData?.id || "",
         title: blogData?.title || "",
         content: blogData?.content || "",
+        owner: blogData?.owner || "",
         posts: [],
     };
 }
@@ -56,6 +60,7 @@ export async function getCurrentUserBlogs(): Promise<Blog[]> {
         id: blogData.id,
         title: blogData?.title || "",
         content: blogData?.content || "",
+        owner: blogData?.owner || "",
         posts: [],
     }));
     
@@ -67,7 +72,6 @@ export async function getUserBlogs(userId: string): Promise<Blog[]> {
         filter: {
             owner: { eq: userId },
         },
-        authMode: "userPool",
     });
     if (errors) {
         throw new Error(errors[0].message);
@@ -77,6 +81,7 @@ export async function getUserBlogs(userId: string): Promise<Blog[]> {
         id: blogData.id,
         title: blogData?.title || "",
         content: blogData?.content || "",
+        owner: blogData?.owner || "",
         posts: [],
     }));
     
@@ -86,7 +91,7 @@ export async function getUserBlogs(userId: string): Promise<Blog[]> {
 
 
 export async function getBlogPosts(blogData: any): Promise<Post[]> {
-    const {data: posts} = blogData?.posts();
+    const {data: posts} = await blogData?.posts();
     if (!posts) {
         return [];
     }
@@ -114,6 +119,18 @@ export async function getBlogById(blogId: string): Promise<Blog | null> {
         id: blogData.id,
         title: blogData?.title || "",
         content: blogData?.content || "",
+        owner: blogData?.owner || "",
         posts,
     };
+}
+
+export async function blogExist(blogId: string): Promise<boolean> {
+const { data: blogData, errors } = await amplifyClient.models.Blog.get({id: blogId});
+    if (errors) {
+        throw new Error(errors[0].message);
+    }
+    if (!blogData) {
+        return false;
+    }
+    return true
 }

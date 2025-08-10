@@ -1,0 +1,17 @@
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-size: 18px;
+    color: #555;
+}
+
+.notFound{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: red;
+    font-size: xx-large;
+}

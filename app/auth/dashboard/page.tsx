@@ -1,16 +1,16 @@
 'use client';
+import BlogView from '@/components/blog';
 import { Blog, getCurrentUserBlogs } from '@/lib/blog';
-import { useAuthenticator } from '@aws-amplify/ui-react';
 import React from 'react';
+import styles from './page.module.scss';
+import Link from 'next/link';
 
 export default function Dashboard() {
   const [blogs, setBlogs] = React.useState<Blog[] | null>(null);
-  const { signOut } = useAuthenticator();
   React.useEffect(() => {
     if (blogs == null) {
       getCurrentUserBlogs().then((data) => {
         setBlogs(data);
-        console.log('Fetched blogs:', data);
       }).catch((error) => {
         console.error('Error fetching blogs:', error);
       });
@@ -18,17 +18,20 @@ export default function Dashboard() {
   }, []);
 
   return (
-    <div style={{ padding: '20px' }}>
-      <h1>Dashboard</h1>
+    <div>
+      <h1 className={styles.heading}>Dashboard</h1>
       <div>
-        <p>Welcome to your dashboard!</p>
-        <ul>
-          <li>Overview</li>
-          <li>Statistics</li>
-          <li>Reports</li>
-        </ul>
+        {blogs ? (
+          <div>
+            <Link href="/auth/blogs/create">Create Blog</Link>
+            <div className={styles.blogsContainer}>
+              {blogs.map((blog) => <BlogView key={blog.id} blog={blog} href={`/auth/blogs/${blog.id}`} />)}
+            </div>
+          </div>
+        ) : (
+          <p className={styles.loadingText}>Loading blogs...</p>
+        )}
       </div>
-      <button onClick={() => signOut()}>Sign Out</button>
     </div>
   );
 }

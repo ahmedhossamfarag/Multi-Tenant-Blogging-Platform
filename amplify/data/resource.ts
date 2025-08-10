@@ -16,6 +16,7 @@ const schema = a.schema({
     .model({
       title: a.string(),
       content: a.string(),
+      owner: a.string(),
       posts: a.hasMany('Post', 'blogId'),
     })
     .authorization((allow) => [allow.publicApiKey().to(['read']), allow.owner()]),

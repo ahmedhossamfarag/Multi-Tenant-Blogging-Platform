@@ -1,6 +1,7 @@
 import React from "react";
 import "@aws-amplify/ui-react/styles.css";
 import AuthenticatorWrapper from "@/components/authenticator";
+import Header from "@/components/header/header";
 
 
 export default function Layout({
@@ -9,8 +10,9 @@ export default function Layout({
   children: React.ReactNode;
 }) {
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>      
+    <div>      
         <AuthenticatorWrapper>
+          <Header />
           {children}
         </AuthenticatorWrapper>
     </div>
