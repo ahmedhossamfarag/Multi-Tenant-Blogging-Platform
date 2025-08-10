@@ -15,11 +15,12 @@ export type Post = {
     title: string;
     content: string;
     img: string;
+    createdAt?: string;
 }
 
 const postSchema = z.object({
-    title: z.string(),
-    content: z.string(),
+    title: z.string({message:'Title is required'}),
+    content: z.string({message:'Content is required'}),
     img: z.string(),
     blogId: z.string(),
 });
@@ -27,7 +28,7 @@ const postSchema = z.object({
 export async function createPost(post: PostInterface): Promise<Post> {
     const validatedPost = postSchema.safeParse(post);
     if (!validatedPost.success) {
-        throw new Error(validatedPost.error.message);
+        throw new Error(validatedPost.error.errors.map(e => e.message).join(", "));
     }
     const { title, content, img, blogId } = validatedPost.data;
     const { errors, data: Post } = await amplifyClient.models.Post.create({
