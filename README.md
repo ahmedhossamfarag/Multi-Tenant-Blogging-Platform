@@ -1,25 +1,31 @@
-## AWS Amplify Next.js (App Router) Starter Template
-
-This repository provides a starter template for creating applications using Next.js (App Router) and AWS Amplify, emphasizing easy setup for authentication, API, and database capabilities.
+# Cloud-Based Multi-Tenant Blogging Platform
 
 ## Overview
+A cloud-native blogging platform built using Next.js for the frontend and serverless backend services from
+AWS. The application supports multi-tenant architecture, where users can create accounts, start blogs,
+publish posts.
 
-This template equips you with a foundational Next.js application integrated with AWS Amplify, streamlined for scalability and performance. It is ideal for developers looking to jumpstart their project with pre-configured AWS services like Cognito, AppSync, and DynamoDB.
+## Tech Stack
+Frontend: Next.js 14 (App Router, TypeScript, Sass)
+Authentication: Amazon Cognito
+Database: Amazon DynamoDB (for blog metadata, users, posts)
+Storage: Amazon S3 (for images)
+API: AWS Amplify
 
 ## Features
+1. User Accounts & Authentication
+Register/login/logout via Cognito
+Email verification and password reset
+1. Multi-Tenant Blog Management
+Each user can manage multiple blogs
+Subdomain support: user.yourdomain.com
+1. Create Posts
+1. Blog Viewing
 
-- **Authentication**: Setup with Amazon Cognito for secure user authentication.
-- **API**: Ready-to-use GraphQL endpoint with AWS AppSync.
-- **Database**: Real-time database powered by Amazon DynamoDB.
-
-## Deploying to AWS
-
-For detailed instructions on deploying your application, refer to the [deployment section](https://docs.amplify.aws/nextjs/start/quickstart/nextjs-app-router-client-components/#deploy-a-fullstack-app-to-aws) of our documentation.
-
-## Security
-
-See [CONTRIBUTING](CONTRIBUTING.md#security-issue-notifications) for more information.
-
-## License
-
-This library is licensed under the MIT-0 License. See the LICENSE file.
+## Screenshots
+![img](screenshots/img1.png)
+![img](screenshots/img2.png)
+![img](screenshots/img3.png)
+![img](screenshots/img4.png)
+![img](screenshots/img5.png)
+![img](screenshots/img6.png)
