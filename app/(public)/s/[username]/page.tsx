@@ -28,7 +28,7 @@ export default function Page() {
                 {blogs ? (
                     <div>
                         <div className={styles.blogsContainer}>
-                            {blogs.map((blog) => <BlogView key={blog.id} blog={blog} href={`/blogs/${blog.id}`} />)}
+                            {blogs.map((blog) => <BlogView key={blog.id} blog={blog} href={`s/${username}/blogs/${blog.id}`} />)}
                         </div>
                     </div>
                 ) : (
